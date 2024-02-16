@@ -86,3 +86,24 @@ SELECT authorID, lastName FROM Authors;
 # insert
 INSERT INTO PaperAuthors (paperID, authorID) 
    VALUES (:paperID_from_dropdown_Input, :authorID_from_dropdown_Input);
+
+# Delete
+DELETE FROM PaperAuthors 
+   WHERE paperID = :paperID_selected_from_PaperAuthors_page
+   AND authorID = :authorID_selected_from_PaperAuthors_page;
+
+# Update
+# get row of data to be populated inside of editable fields for updating
+SELECT paperID, authorID
+   FROM PaperAuthors 
+   WHERE paperID = :paperID_selected_from_PaperAuthors_page
+   AND authorID = :authorID_selected_from_PaperAuthors_page;
+# drop down 1: paper ID
+SELECT paperID, title FROM Papers;
+# drop down 2: authorID
+SELECT authorID, lastName FROM Authors;
+# save
+UPDATE PaperAuthors 
+   SET paperID = :paperID_from_dropdown_Input, authorID= :authorIDInput_from_dropdown_Input, 
+   WHERE paperID = :paperID_selected_from_PaperAuthors_page
+   AND authorID = :authorID_selected_from_PaperAuthors_page;
