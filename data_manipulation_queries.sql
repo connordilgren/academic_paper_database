@@ -10,6 +10,10 @@ SELECT *
 INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) 
    VALUES (:firstNameInput, :middleNameInput, :lastNameInput, :emailInput, :websiteURLInput, :isRetiredInput, :hIndexInput);
 
+# Delete
+DELETE FROM Authors 
+   WHERE authorID = :authorID_selected_from_Authors_page;
+
 # Conferences Table -----------------------------------------------------------
 # Read
 SELECT *
@@ -67,6 +71,10 @@ SELECT conferenceID, name FROM Conferences;
 # insert
 INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) 
    VALUES (:title, :yearPublished, :numCitations, :conferenceID_from_dropdown_Input);
+
+# Delete
+DELETE FROM Papers 
+   WHERE paperID = :paperID_selected_from_Papers_page;
 
 # PaperAuthors Table ----------------------------------------------------------
 # Read

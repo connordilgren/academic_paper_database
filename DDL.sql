@@ -81,7 +81,7 @@ CREATE OR REPLACE TABLE AuthorOrganizations (
   authorEndDate date NOT NULL,
   PRIMARY KEY (authorOrganizationsID),
   FOREIGN KEY(organizationID) REFERENCES Organizations(organizationID),
-  FOREIGN KEY(authorID) REFERENCES Authors(authorID)
+  FOREIGN KEY(authorID) REFERENCES Authors(authorID) ON DELETE SET NULL
 );
 
 --
@@ -119,17 +119,17 @@ VALUES
 (5, "Misspecification in Inverse Reinforcement Learning", "2023", 11, 3);
 
 --
--- Create Papers Table
+-- Create PaperAuthors Table
 --
 CREATE OR REPLACE TABLE PaperAuthors (
   paperID int,
   authorID int,
-  FOREIGN KEY(paperID) REFERENCES Papers(paperID),
-  FOREIGN KEY(authorID) REFERENCES Authors(authorID)
+  FOREIGN KEY(paperID) REFERENCES Papers(paperID) ON DELETE CASCADE,
+  FOREIGN KEY(authorID) REFERENCES Authors(authorID) ON DELETE SET NULL
 );
 
 --
--- Insert sample data into Papers
+-- Insert sample data into PaperAuthors
 --
 INSERT INTO PaperAuthors
 /* (paperID, authorID) */
