@@ -74,12 +74,12 @@ VALUES
 -- Create AuthorOrganizations Table
 --
 CREATE OR REPLACE TABLE AuthorOrganizations (
-  authorOrganizationsID int AUTO_INCREMENT,
+  authorOrganizationID int AUTO_INCREMENT,
   organizationID int,
   authorID int,
   authorstartDate date NOT NULL,
   authorEndDate date NOT NULL,
-  PRIMARY KEY (authorOrganizationsID),
+  PRIMARY KEY (authorOrganizationID),
   FOREIGN KEY(organizationID) REFERENCES Organizations(organizationID),
   FOREIGN KEY(authorID) REFERENCES Authors(authorID) ON DELETE SET NULL
 );
