@@ -30,47 +30,77 @@
     </nav>
 
     <title>
-            Research Paper Tracker
+        Research Paper Tracker
     </title>
 
     <h2>Conferences</h2>
 
-    <table style="width:100%">
-        <tbody>
-            <tr>
-                <th>Conference ID</th>
-                <th>Name</th>
-                <th>Year</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Is Online</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>International Conference on Machine Learning</td>
-                <td>2023</td>
-                <td>Honolulu</td>
-                <td>USA</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>NeurIPS</td>
-                <td>2023</td>
-                <td>New Orleans</td>
-                <td>USA</td>
-                <td>0</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Association for the Advancement of Artificial Intelligence</td>
-                <td>2023</td>
-                <td>Washington, DC</td>
-                <td>USA</td>
-                <td>0</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <table style="width:100%">
+            <tbody>
+                <tr>
+                    <th>Conference ID</th>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Is Online</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>International Conference on Machine Learning</td>
+                    <td>2023</td>
+                    <td>Honolulu</td>
+                    <td>USA</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>NeurIPS</td>
+                    <td>2023</td>
+                    <td>New Orleans</td>
+                    <td>USA</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Association for the Advancement of Artificial Intelligence</td>
+                    <td>2023</td>
+                    <td>Washington, DC</td>
+                    <td>USA</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+
+    <br>
+    <article>
+        <form id="addConference">
+            <fieldset>
+                <legend>Add Conference</legend>
+                <label>Conference ID</label>
+                <input type="text" name="conferenceID">
+                <br>
+                <label>Conference Name</label>
+                <input type="text" name="conferenceName">
+                <br>
+                <label>Conference Year</label>
+                <input type="text" name="conferenceYear">
+                <br>
+                <label>Conference City</label>
+                <input type="text" name="conferenceCity">
+                <br>
+                <label>Conference Country</label>
+                <input type="text" name="conferenceCountry">
+                <br>
+                <label>Is this conference online?</label>
+                <input type="text" name="isOnline">
+                <br>
+                <button type="submit">Add Conference</button>
+            </fieldset>
+        </form>
+    </article>
 
 </body>
 </html>
