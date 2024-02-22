@@ -95,7 +95,11 @@
                 <input type="text" name="conferenceCountry">
                 <br>
                 <label>Is this conference online?</label>
-                <input type="text" name="isOnline">
+                <input list="isOnline">
+                <datalist id="isOnline">
+                    <option value="Yes">
+                    <option value="No">
+                </datalist>
                 <br>
                 <button type="submit">Add Conference</button>
             </fieldset>

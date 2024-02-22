@@ -73,11 +73,28 @@
         <form id="addPaperAuthor">
             <fieldset>
                 <legend>Add Paper Author</legend>
-                <label>Paper ID</label>
-                <input type="text" name="paperID">
+
+                <label>Paper Name</label>
+                <input list="paperNames">
+                <datalist id="paperNames">
+                    <option value="Learning-Rate-Free Learning by D-Adaptation">
+                    <option value="A Watermark for Large Language Models">
+                    <option value="Are Emergent Abilities of Large Language Models a Mirage?">
+                    <option value="SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives">
+                    <option value="Misspecification in Inverse Reinforcement Learning">
+                </datalist>
                 <br>
-                <label>Author ID</label>
-                <input type="text" name="authorID">
+
+                <label>Author Name</label>
+                <input list="authorNames">
+                <datalist id="authorNames">
+                    <option value="Simecek">
+                    <option value="Defazio">
+                    <option value="Mishchenko">
+                    <option value="Skalse">
+                    <option value="Kirchenbauer">
+                    <option value="Schaeffer">
+                </datalist>
                 <br>
                 <button type="submit">Add Author</button>
             </fieldset>

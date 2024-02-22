@@ -77,16 +77,29 @@
                 <input type="text" name="authorOrganizationID">
                 <br>
                 <label>Organization ID</label>
-                <input type="text" name="organizationID">
+                <input list="conferenceNames">
+                <datalist id="conferenceNames">
+                    <option value="International Conference on Machine Learning">
+                    <option value="NeurIPS">
+                    <option value="Association for the Advancement of Artificial Intelligence">
+                </datalist>
                 <br>
                 <label>Author ID</label>
-                <input type="text" name="authorID">
+                <input list="authorNames">
+                <datalist id="authorNames">
+                    <option value="Simecek">
+                    <option value="Defazio">
+                    <option value="Mishchenko">
+                    <option value="Skalse">
+                    <option value="Kirchenbauer">
+                    <option value="Schaeffer">
+                </datalist>
                 <br>
                 <label>Author Start Date</label>
-                <input type="text" name="authorStartDate">
+                <input type="date" name="authorStartDate">
                 <br>
                 <label>Author End Date</label>
-                <input type="text" name="authorEndDate">
+                <input type="date" name="authorEndDate">
                 <br>
                 <button type="submit">Add Author Organization</button>
             </fieldset>

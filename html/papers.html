@@ -99,8 +99,13 @@
                 <label>Number of Citations</label>
                 <input type="text" name="numCitations">
                 <br>
-                <label>Conference ID</label>
-                <input type="text" name="conferenceID">
+                <label>Conference Name</label>
+                <input list="conferenceNames">
+                <datalist id="conferenceNames">
+                    <option value="International Conference on Machine Learning">
+                    <option value="NeurIPS">
+                    <option value="Association for the Advancement of Artificial Intelligence">
+                </datalist>
                 <br>
                 <button type="submit">Add Paper</button>
             </fieldset>
