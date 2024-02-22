@@ -12,8 +12,6 @@
 <body>
     
     <nav>
-        <a href="https://web.engr.oregonstate.edu/~dilgrenc/academic_paper_database/html/index.html">Home</a>
-        &nbsp;
         <a href="https://web.engr.oregonstate.edu/~dilgrenc/academic_paper_database/html/conferences.html">Conferences
         </a>
         &nbsp;
@@ -35,38 +33,54 @@
 
     <h2>Paper Authors</h2>
 
-    <table style="width:100%">
-        <tbody>
-            <tr>
-                <th>Paper ID</th>
-                <th>Author ID</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>2</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>6</td>
-            </tr>
-        </tbody>
-    </table>
+    <article>
+        <table style="width:100%">
+            <tbody>
+                <tr>
+                    <th><button>Add</button></th>
+                    <th></th>
+                    <th>Paper ID</th>
+                    <th>Author ID</th>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>4</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>1</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>5</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>2</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td><button>Edit</button></td>
+                    <td><button>Delete</button></td>
+                    <td>3</td>
+                    <td>6</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
 
     <br>
     <article>
@@ -99,6 +113,73 @@
                 <button type="submit">Add Author</button>
             </fieldset>
         </form>
+    </article>
+
+    <br>
+    <article>
+        <form id="updatePaperAuthor">
+            <fieldset>
+                <legend>Update Paper Author</legend>
+
+                <label>Paper Name</label>
+                <input list="paperNames">
+                <datalist id="paperNames">
+                    <option value="Learning-Rate-Free Learning by D-Adaptation">
+                    <option value="A Watermark for Large Language Models">
+                    <option value="Are Emergent Abilities of Large Language Models a Mirage?">
+                    <option value="SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives">
+                    <option value="Misspecification in Inverse Reinforcement Learning">
+                </datalist>
+                <br>
+
+                <label>Author Name</label>
+                <input list="authorNames">
+                <datalist id="authorNames">
+                    <option value="Simecek">
+                    <option value="Defazio">
+                    <option value="Mishchenko">
+                    <option value="Skalse">
+                    <option value="Kirchenbauer">
+                    <option value="Schaeffer">
+                </datalist>
+                <br>
+                <button type="submit">Update Author</button>
+            </fieldset>
+        </form>
+    </article>
+
+    <br>
+    <article>
+        <form id="deletePaperAuthor">
+            <fieldset>
+                <legend>Delete Paper Author</legend>
+                
+                <label>Paper Name</label>
+                <input list="paperNames">
+                <datalist id="paperNames">
+                    <option value="Learning-Rate-Free Learning by D-Adaptation">
+                    <option value="A Watermark for Large Language Models">
+                    <option value="Are Emergent Abilities of Large Language Models a Mirage?">
+                    <option value="SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives">
+                    <option value="Misspecification in Inverse Reinforcement Learning">
+                </datalist>
+                <br>
+
+                <label>Author Name</label>
+                <input list="authorNames">
+                <datalist id="authorNames">
+                    <option value="Simecek">
+                    <option value="Defazio">
+                    <option value="Mishchenko">
+                    <option value="Skalse">
+                    <option value="Kirchenbauer">
+                    <option value="Schaeffer">
+                </datalist>
+                <br>
+                <button type="submit">Delete Author</button>
+            </fieldset>
+        </form>
+    </article>
 
 </body>
 </html>
