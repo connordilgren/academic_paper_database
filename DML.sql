@@ -14,6 +14,18 @@ INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetir
 DELETE FROM Authors 
    WHERE authorID = :authorID_selected_from_Authors_page;
 
+# Update
+# save
+UPDATE Authors 
+   SET firstName = :firstName_input, 
+   middleName = :middleName_input,
+   lastName = :lastName_input,
+   email = :email_input,
+   websiteURL = :websiteURL_input,
+   isRetired = :isRetired_input,
+   hIndex = :hIndex,
+   WHERE authorID = :authorID_selected_from_Authors_page
+
 # Conferences Table -----------------------------------------------------------
 # Read
 SELECT *
@@ -75,6 +87,17 @@ INSERT INTO Papers (title, yearPublished, numCitations, conferenceID)
 # Delete
 DELETE FROM Papers 
    WHERE paperID = :paperID_selected_from_Papers_page;
+
+# Update
+# drop down: get conference ids, names
+SELECT conferenceID, name FROM Conferences;
+# save
+UPDATE Papers 
+   SET title = :title_from_Input, 
+   yearPublished = :year_from_Input, 
+   numCitations = :numCitations_from_Input,
+   conferenceID = :conferenceID_from_dropdown_Input
+   WHERE paperID = :paperID_selected_from_Papers_page
 
 # PaperAuthors Table ----------------------------------------------------------
 # Read
