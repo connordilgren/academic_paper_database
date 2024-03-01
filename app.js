@@ -110,6 +110,26 @@ app.post('/add-author-ajax', function(req, res)
     })
 });
 
+app.delete('/delete-author-ajax/', function(req,res,next){
+    let data = req.body;
+    let authorID = parseInt(data.authorID);
+    let deleteAuthor = `DELETE FROM Authors WHERE authorID = ?`;  
+
+          // Run the query
+          db.pool.query(deleteAuthor, [authorID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                res.sendStatus(204);
+              }
+  })});
+
 /*
     LISTENER
 */
