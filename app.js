@@ -40,20 +40,44 @@ app.post('/add-author-ajax', function(req, res)
     let data = req.body;
 
     // Capture NULL values
-    let homeworld = parseInt(data.homeworld);
-    if (isNaN(homeworld))
+    let firstName = parseInt(data.firstName);
+    if (isNaN(firstName))
     {
-        homeworld = 'NULL'
+        firstName = 'NULL'
     }
 
-    let age = parseInt(data.age);
-    if (isNaN(age))
+    let middleName = parseInt(data.middleName);
+    if (isNaN(middleName))
     {
-        age = 'NULL'
+        middleName = 'NULL'
+    }
+
+    let email = parseInt(data.email);
+    if (isNaN(email))
+    {
+        email = 'NULL'
+    }
+
+    let websiteURL = parseInt(data.websiteURL);
+    if (isNaN(websiteURL))
+    {
+        websiteURL = 'NULL'
+    }
+
+    let isRetired = parseInt(data.isRetired);
+    if (isNaN(isRetired))
+    {
+        isRetired = 'NULL'
+    }
+
+    let hIndex = parseInt(data.hIndex);
+    if (isNaN(hIndex))
+    {
+        hIndex = 'NULL'
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES ('${data.fname}', '${data.lname}', ${homeworld}, ${age})`;
+    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${firstName}', '${middleName}', '${data.lastName}', '${email}', '${websiteURL}', '${isRetired}', '${hIndex}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -66,7 +90,7 @@ app.post('/add-author-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = `SELECT * FROM bsg_people;`;
+            query2 = `SELECT * FROM Authors;`;
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
