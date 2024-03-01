@@ -14,6 +14,7 @@ addAuthorForm.addEventListener("submit", function (e) {
     let inputEmail = document.getElementById("input-email");
     let inputWebsite = document.getElementById("input-website");
     let inputIsRetired = document.getElementById("input-isRetired");
+    let inputHIndex = document.getElementById("input-hIndex");
 
     // Get the values from the form fields
     let firstNameValue = inputFirstName.value;
@@ -22,15 +23,17 @@ addAuthorForm.addEventListener("submit", function (e) {
     let emailValue = inputEmail.value;
     let websiteValue = inputWebsite.value;
     let isRetiredValue = inputIsRetired.value;
+    let hIndexValue = inputHIndex.value;
 
     // Put our data we want to send in a javascript object
     let data = {
-        fname: firstNameValue,
-        mname: middleNameValue,
-        lname: lastNameValue,
+        firstName: firstNameValue,
+        middleName: middleNameValue,
+        lastName: lastNameValue,
         email: emailValue,
         website: websiteValue,
-        isRetired: isRetiredValue
+        isRetired: isRetiredValue,
+        hIndex: hIndexValue
     }
     
     // Setup our AJAX request
@@ -52,6 +55,7 @@ addAuthorForm.addEventListener("submit", function (e) {
             inputEmail.value = '';
             inputWebsite.value = '';
             inputIsRetired.value = '';
+            inputHIndex.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -69,7 +73,7 @@ addAuthorForm.addEventListener("submit", function (e) {
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
-    let currentTable = document.getElementById("author-table");
+    let currentTable = document.getElementById("Authors-table");
 
     // Get the location where we should insert the new row (end of table)
     let newRowIndex = currentTable.rows.length;
@@ -87,15 +91,17 @@ addRowToTable = (data) => {
     let emailCell = document.createElement("TD");
     let websiteCell = document.createElement("TD");
     let isRetiredCell = document.createElement("TD");
+    let hIndexCell = document.createElementNS("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
-    firstNameCell.innerText = newRow.fname;
-    middleNameCell.innerText = newRow.mname;
-    lastNameCell.innerText = newRow.lname;
+    idCell.innerText = newRow.authorID;
+    firstNameCell.innerText = newRow.firstName;
+    middleNameCell.innerText = newRow.middleName;
+    lastNameCell.innerText = newRow.lastName;
     emailCell.innerText = newRow.email;
     websiteCell.innerText = newRow.website;
     isRetiredCell.innerText = newRow.isRetired;
+    hIndexCell.innerText = newRow.hIndex;
 
     // Add the cells to the row 
     row.appendChild(idCell);
@@ -105,6 +111,7 @@ addRowToTable = (data) => {
     row.appendChild(emailCell);
     row.appendChild(websiteCell);
     row.appendChild(isRetiredCell);
+    row.appendChild(hIndexCell);
     
     // Add the row to the table
     currentTable.appendChild(row);
