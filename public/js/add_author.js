@@ -93,6 +93,8 @@ addRowToTable = (data) => {
     let isRetiredCell = document.createElement("TD");
     let hIndexCell = document.createElementNS("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.authorID;
     firstNameCell.innerText = newRow.firstName;
@@ -103,6 +105,12 @@ addRowToTable = (data) => {
     isRetiredCell.innerText = newRow.isRetired;
     hIndexCell.innerText = newRow.hIndex;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteAuthor(newRow.authorID);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(firstNameCell);
@@ -112,6 +120,10 @@ addRowToTable = (data) => {
     row.appendChild(websiteCell);
     row.appendChild(isRetiredCell);
     row.appendChild(hIndexCell);
+    row.appendChild(deleteCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.authorID);
     
     // Add the row to the table
     currentTable.appendChild(row);
