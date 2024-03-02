@@ -1,3 +1,10 @@
+// Citation:
+// Date: 3/1/24
+// Based on nodejs-starter-app
+// This code is unoriginal outside of the values of the user, password, and 
+// database values.
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
 // ./database/db-connector.js
 
 // Get an instance of mysql we can use in the app
