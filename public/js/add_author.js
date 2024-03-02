@@ -1,3 +1,10 @@
+// Citation:
+// Date: 3/1/24
+// Based on nodejs-starter-app
+// This code's logic and structure is unoriginal. It has been adapted to work 
+// for our group's schema. 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
 // Get the objects we need to modify
 let addAuthorForm = document.getElementById('add-author-form-ajax');
 
