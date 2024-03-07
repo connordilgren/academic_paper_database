@@ -1,0 +1,76 @@
+<!--
+// Citation:
+// Date: 3/7/24
+// Based on nodejs-starter-app
+// This code's logic and structure is unoriginal. It has been adapted to work 
+// for our group's schema. 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- papers.hbs -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Create a table --}}
+<table id="Papers-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.paperID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.yearPublished}}</td>
+            <td>{{this.numCitations}}</td>
+            <td>{{this.conference}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/authorOrganizations.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add New Paper</h2>
+<p>To add a new paper, please enter its information below and click 'Submit'!</p>
+<form id="add-paper-form-ajax">
+    <legend>Add Paper</legend>
+
+    <label for="input-title">Paper Title: </label>
+    <input type="text" name="input-title" id="input-title" required>
+
+    <label for="input-yearPublished">Year Published: </label>
+    <input type="number" name="input-yearPublished" id="input-yearPublished">
+
+    <label for="input-numCitations">Number of Citations: </label>
+    <input type="number" name="input-numCitations" id="input-numCitations">
+
+    <label for="input-conference">Conference Presented at: </label>
+    <select name="input-conference" id="input-conference">
+        <option value="">Select a Conference</option>
+        {{#each conferences}}
+            <option value="{{this.conferenceID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_paper.js"></script>

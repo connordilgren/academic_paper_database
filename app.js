@@ -26,13 +26,15 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 // Database
 var db = require('./database/db-connector')
 
-/*
-    ROUTES
-*/
+// index
+
 app.get('/', function(req, res)
     {
         res.render('index');
     });
+
+
+// authors
 
 app.get('/authors', function(req, res)
     {  
@@ -43,8 +45,6 @@ app.get('/authors', function(req, res)
             res.render('authors', {data: rows});                  // Render the authors.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
-
-// app.js - ROUTES section
 
 app.post('/add-author-ajax', function(req, res) 
 {
@@ -142,6 +142,9 @@ app.delete('/delete-author-ajax/', function(req,res,next){
               }
   })});
 
+
+// author organizations
+
 app.get('/authorOrganizations', function(req, res)
 {  
     let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID;";               // Define our query
@@ -207,6 +210,68 @@ app.post('/add-authorOrganization-ajax', function(req, res)
     })
 });
 
+
+// papers
+
+app.get('/papers', function(req, res)
+{  
+    let query1 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers INNER JOIN Conferences ON Papers.paperID = Conferences.conferenceID;";               // Define our query
+    let query2 = "SELECT conferenceID, name FROM Conferences;";
+    
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        let papers = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let conferences = rows;
+
+            res.render('papers', {data: papers, conferences: conferences});
+
+        })
+    })
+});
+
+app.post('/add-paper-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', '${data.conference}')`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT
+            query2 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers INNER JOIN Conferences ON Papers.paperID = Conferences.conferenceID;";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 /*
     LISTENER
