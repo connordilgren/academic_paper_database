@@ -53,10 +53,20 @@
     <legend>Add Author-Organization</legend>
 
     <label for="input-orgName">Organization Name: </label>
-    <input type="text" name="input-orgName" id="input-orgName" required>
+    <select name="input-orgName" id="input-orgName">
+        <option value="">Select an Organization Name</option>
+        {{#each organizations}}
+            <option value="{{this.organizationID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-lname">Author Last Name: </label>
-    <input type="text" name="input-lname" id="input-lname" required>
+    <select name="input-lname" id="input-lname">
+        <option value="">Select an Author Last Name</option>
+        {{#each authors}}
+            <option value="{{this.authorID}}">{{this.lastName}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-startDate">Author Start Date: </label>
     <input type="date" name="input-startDate" id="input-startDate" required>
@@ -69,4 +79,3 @@
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_authorOrganization.js"></script>
-

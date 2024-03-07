@@ -145,12 +145,26 @@ app.delete('/delete-author-ajax/', function(req,res,next){
 app.get('/authorOrganizations', function(req, res)
 {  
     let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID;";               // Define our query
-
+    let query2 = "SELECT organizationID, name FROM Organizations";
+    let query3 = "SELECT authorID, lastName FROM Authors";
+    
     db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-        res.render('authorOrganizations', {data: rows});                  // Render the authorOrganizations.hbs file, and also send the renderer
-    })                                                      // an object where 'data' is equal to the 'rows' we
-});                                                         // received back from the query
+        let authorOrganizations = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let organizations = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let authors = rows;
+
+                res.render('authorOrganizations', {data: authorOrganizations, organizations: organizations, authors: authors});
+            })
+        })
+    })
+});
 
 app.post('/add-authorOrganization-ajax', function(req, res) 
 {
