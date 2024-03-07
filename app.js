@@ -52,36 +52,6 @@ app.post('/add-author-ajax', function(req, res)
     let data = req.body;
 
     // Capture NULL values
-    let firstName = parseInt(data.firstName);
-    if (isNaN(firstName))
-    {
-        firstName = 'NULL'
-    }
-
-    let middleName = parseInt(data.middleName);
-    if (isNaN(middleName))
-    {
-        middleName = 'NULL'
-    }
-
-    let email = parseInt(data.email);
-    if (isNaN(email))
-    {
-        email = 'NULL'
-    }
-
-    let websiteURL = parseInt(data.websiteURL);
-    if (isNaN(websiteURL))
-    {
-        websiteURL = 'NULL'
-    }
-
-    let isRetired = parseInt(data.isRetired);
-    if (isNaN(isRetired))
-    {
-        isRetired = 'NULL'
-    }
-
     let hIndex = parseInt(data.hIndex);
     if (isNaN(hIndex))
     {
@@ -89,7 +59,7 @@ app.post('/add-author-ajax', function(req, res)
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${firstName}', '${middleName}', '${data.lastName}', '${email}', '${websiteURL}', '${isRetired}', '${hIndex}')`;
+    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', '${hIndex}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
