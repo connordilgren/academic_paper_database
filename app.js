@@ -142,6 +142,17 @@ app.delete('/delete-author-ajax/', function(req,res,next){
               }
   })});
 
+app.get('/authorOrganizations', function(req, res)
+{  
+    let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID;";               // Define our query
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        res.render('authorOrganizations', {data: rows});                  // Render the authorOrganizations.hbs file, and also send the renderer
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                         // received back from the query
+
+
 /*
     LISTENER
 */

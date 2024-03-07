@@ -1,18 +1,18 @@
 <!--
 // Citation:
-// Date: 3/1/24
+// Date: 3/6/24
 // Based on nodejs-starter-app
 // This code's logic and structure is unoriginal. It has been adapted to work 
 // for our group's schema. 
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 -->
 
-<!-- authors.hbs -->
+<!-- authorOrganizations.hbs -->
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 {{!-- Create a table --}}
-<table id="Authors-table">
+<table id="AuthorOrganizations-table">
 
     {{!-- Header section --}}
     <thead>
@@ -25,7 +25,6 @@
                 {{@key}}
             </th>
             {{/each}}
-            <th>delete</th>
         </tr>
     </thead>
 
@@ -35,28 +34,23 @@
         {{!-- For each row, print the attributes, in order --}}
         {{#each data}}
         <tr>
-            <td>{{this.authorID}}</td>
-            <td>{{this.firstName}}</td>
-            <td>{{this.middleName}}</td>
-            <td>{{this.lastName}}</td>
-            <td>{{this.email}}</td>
-            <td>{{this.websiteURL}}</td>
-            <td>{{this.isRetired}}</td>
-            <td>{{this.hIndex}}</td>
-            <td><button onclick="deleteAuthor({{this.authorID}})">Delete</button></td>
+            <td>{{this.authorOrganizationID}}</td>
+            <td>{{this.organizationName}}</td>
+            <td>{{this.authorLastName}}</td>
+            <td>{{this.authorstartDate}}</td>
+            <td>{{this.authorEndDate}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-<script src="./js/delete_author.js"></script>
 
-<!-- /views/index.hbs -->
+<!-- /views/authorOrganizations.hbs -->
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add New Author</h2>
-<p>To add a new author, please enter their information below and click 'Submit'!</p>
+{{!-- Form to add a record to the table 
+<h2>Add New Author-Organization</h2>
+<p>To add a new author-organization, please enter their information below and click 'Submit'!</p>
 <form id="add-author-form-ajax">
-    <legend>Add Author</legend>
+    <legend>Add Author-Organization</legend>
 
     <label for="input-fname">First Name: </label>
     <input type="text" name="input-fname" id="input-fname">
@@ -84,8 +78,8 @@
     <input type="number" name="input-hIndex" id="input-hIndex">
 
     <input type="submit">
-</form>
+</form> --}}
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_author.js"></script>
+{{!-- <script src="./js/add_author.js"></script> --}}
 
