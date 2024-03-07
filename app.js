@@ -15,7 +15,7 @@ var app     = express();            // We need to instantiate an express object 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 52737;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 52738;                 // Set a port number at the top so it's easy to change in the future
 
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
@@ -30,12 +30,17 @@ var db = require('./database/db-connector')
     ROUTES
 */
 app.get('/', function(req, res)
+    {
+        res.render('index');
+    });
+
+app.get('/authors', function(req, res)
     {  
         let query1 = "SELECT * FROM Authors;";               // Define our query
 
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
+            res.render('authors', {data: rows});                  // Render the authors.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
