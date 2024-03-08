@@ -219,8 +219,6 @@ app.post('/add-paper-ajax', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    console.log(data)
-
     // Capture NULL values
     let numCitations = data.numCitations;
     let conference = data.conference;
@@ -241,8 +239,6 @@ app.post('/add-paper-ajax', function(req, res)
     {
         query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', '${conference}')`;
     }
-
-    console.log(conference)
 
     // Create the query and run it on the database
     db.pool.query(query1, function(error, rows, fields){
@@ -276,6 +272,25 @@ app.post('/add-paper-ajax', function(req, res)
         }
     })
 });
+
+app.delete('/delete-paper-ajax/', function(req,res,next){
+    let data = req.body;
+
+    let paperID = parseInt(data.paperID);
+    let deletePaper = `DELETE FROM Papers WHERE paperID = ?`;
+
+          // Run the 1st query
+          db.pool.query(deletePaper, [paperID], function(error, rows, fields){
+            if (error) {
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+            }
+            else
+            {
+                res.sendStatus(204);
+            }
+  })});
 
 /*
     LISTENER

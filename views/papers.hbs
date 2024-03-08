@@ -25,6 +25,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>delete</th>
         </tr>
     </thead>
 
@@ -33,16 +34,18 @@
 
         {{!-- For each row, print the attributes, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.id}}>
             <td>{{this.paperID}}</td>
             <td>{{this.title}}</td>
             <td>{{this.yearPublished}}</td>
             <td>{{this.numCitations}}</td>
             <td>{{this.conference}}</td>
+            <td><button onclick="deletePaper({{this.paperID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_paper.js"></script>
 
 <!-- /views/authorOrganizations.hbs -->
 

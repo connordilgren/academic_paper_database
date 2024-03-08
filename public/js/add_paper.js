@@ -84,6 +84,8 @@ addRowToTable = (data) => {
     let numCitationsCell = document.createElement("TD");
     let conferenceCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
     idCell.innerText = newRow.paperID;
     titleCell.innerText = newRow.title;
@@ -91,12 +93,22 @@ addRowToTable = (data) => {
     numCitationsCell.innerText = newRow.numCitations;
     conferenceCell.innerText = newRow.conference;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deletePaper(newRow.paperID);
+    };
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(titleCell);
     row.appendChild(yearPublishedCell);
     row.appendChild(numCitationsCell);
     row.appendChild(conferenceCell);
+    row.appendChild(deleteCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.paperID);
     
     // Add the row to the table
     currentTable.appendChild(row);
