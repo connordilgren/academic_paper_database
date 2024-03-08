@@ -75,8 +75,9 @@ SELECT paperID,
        numCitations, 
        Conferences.name AS conference 
    FROM Papers
-      INNER JOIN Conferences
-      ON Papers.paperID = Conferences.conferenceID;
+      LEFT JOIN Conferences
+      ON Papers.conferenceID = Conferences.conferenceID
+   ORDER BY paperID ASC;
 
 # Insert
 # drop down 1: get conference ids, names

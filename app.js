@@ -51,15 +51,27 @@ app.post('/add-author-ajax', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
+    console.log(data)
+
     // Capture NULL values
-    let hIndex = parseInt(data.hIndex);
-    if (isNaN(hIndex))
-    {
-        hIndex = 'NULL'
+    let isRetired = data.isRetired;
+    let hIndex = data.hIndex;
+
+    if (isRetired.length === 0 && hIndex === 0) {
+        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', NULL, NULL)`;
+    }
+    else if (isRetired.length !== 0 && hIndex === 0) {
+        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', NULL)`;
+    }
+    else if (isRetired.length === 0 && hIndex !== 0) {
+        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', NULL, '${hIndex}')`;
+    }
+    else {
+        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', '${hIndex}')`;
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', '${hIndex}')`;
+    
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
