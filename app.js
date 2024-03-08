@@ -71,7 +71,7 @@ app.post('/add-author-ajax', function(req, res)
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
+            // If there was no error, perform a SELECT
             query2 = `SELECT * FROM Authors;`;
             db.pool.query(query2, function(error, rows, fields){
 
@@ -185,7 +185,7 @@ app.post('/add-authorOrganization-ajax', function(req, res)
 
 app.get('/papers', function(req, res)
 {  
-    let query1 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers INNER JOIN Conferences ON Papers.paperID = Conferences.conferenceID;";               // Define our query
+    let query1 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers LEFT JOIN Conferences ON Papers.conferenceID = Conferences.conferenceID ORDER BY paperID ASC;";
     let query2 = "SELECT conferenceID, name FROM Conferences;";
     
     db.pool.query(query1, function(error, rows, fields){    // Execute the query
@@ -207,10 +207,32 @@ app.post('/add-paper-ajax', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
+    console.log(data)
+
     // Capture NULL values
+    let numCitations = data.numCitations;
+    let conference = data.conference;
+
+    if (numCitations.length === 0 && conference.length === 0)
+    {
+        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', NULL, NULL)`;
+    }
+    else if (numCitations.length !== 0 && conference.length === 0)
+    {
+        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', NULL)`;
+    }
+    else if (numCitations.length === 0 && conference.length !== 0)
+    {
+        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', NULL, '${conference}')`;
+    }
+    else
+    {
+        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', '${conference}')`;
+    }
+
+    console.log(conference)
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', '${data.conference}')`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -223,7 +245,7 @@ app.post('/add-paper-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT
-            query2 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers INNER JOIN Conferences ON Papers.paperID = Conferences.conferenceID;";
+            query2 = "SELECT paperID, title, yearPublished, numCitations, Conferences.name AS conference FROM Papers LEFT JOIN Conferences ON Papers.conferenceID = Conferences.conferenceID ORDER BY paperID ASC;";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400

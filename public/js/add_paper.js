@@ -63,8 +63,7 @@ addPaperForm.addEventListener("submit", function (e) {
 })
 
 
-// Creates a single row from an Object representing a single record from 
-// bsg_people
+// Creates a single row from an Object representing a single record
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -98,9 +97,6 @@ addRowToTable = (data) => {
     row.appendChild(yearPublishedCell);
     row.appendChild(numCitationsCell);
     row.appendChild(conferenceCell);
-
-    // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.paperID);
     
     // Add the row to the table
     currentTable.appendChild(row);
