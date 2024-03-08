@@ -6,10 +6,10 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
-let addAuthorForm = document.getElementById('add-paper-form-ajax');
+let addPaperForm = document.getElementById('add-paper-form-ajax');
 
 // Modify the objects we need
-addAuthorForm.addEventListener("submit", function (e) {
+addPaperForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();

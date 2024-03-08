@@ -55,7 +55,8 @@ SELECT authorOrganizationID,
       INNER JOIN Organizations
       ON AuthorOrganizations.organizationID = Organizations.organizationID
       INNER JOIN Authors
-      ON AuthorOrganizations.authorID = Authors.authorID;
+      ON AuthorOrganizations.authorID = Authors.authorID
+   ORDER BY authorOrganizationID ASC;
 
 # Insert
 # drop down 1: get organization ids, names

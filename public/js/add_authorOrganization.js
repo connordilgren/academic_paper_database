@@ -6,10 +6,10 @@
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
 
 // Get the objects we need to modify
-let addAuthorForm = document.getElementById('add-authorOrganization-form-ajax');
+let addAuthorOrganizationForm = document.getElementById('add-authorOrganization-form-ajax');
 
 // Modify the objects we need
-addAuthorForm.addEventListener("submit", function (e) {
+addAuthorOrganizationForm.addEventListener("submit", function (e) {
     
     // Prevent the form from submitting
     e.preventDefault();
@@ -98,9 +98,6 @@ addRowToTable = (data) => {
     row.appendChild(lastNameCell);
     row.appendChild(startDateCell);
     row.appendChild(endDateCell);
-
-    // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.authorOrganizationID);
     
     // Add the row to the table
     currentTable.appendChild(row);

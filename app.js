@@ -117,7 +117,7 @@ app.delete('/delete-author-ajax/', function(req,res,next){
 
 app.get('/authorOrganizations', function(req, res)
 {  
-    let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID;";               // Define our query
+    let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";               // Define our query
     let query2 = "SELECT organizationID, name FROM Organizations";
     let query3 = "SELECT authorID, lastName FROM Authors";
     
@@ -160,7 +160,7 @@ app.post('/add-authorOrganization-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT
-            query2 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID;";
+            query2 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
