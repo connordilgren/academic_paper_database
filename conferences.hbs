@@ -1,0 +1,82 @@
+<!--
+// Citation:
+// Date: 3/6/24
+// Based on nodejs-starter-app
+// This code's logic and structure is unoriginal. It has been adapted to work 
+// for our group's schema. 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- conferences.hbs -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Create a table --}}
+<table id="Conferences-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.conferenceID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.year}}</td>
+            <td>{{this.city}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.isOnline}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/conferences.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add New Conferences</h2>
+<p>To add a new conferences, please enter their information below and click 'Submit'!</p>
+<form id="add-conferences-form-ajax">
+    <legend>Add Conferences</legend>
+
+    <label for="input-cname">Conference Name: </label>
+    <input type="text" name="input-cname" id="input-cname">
+
+    <label for="input-year">Year: </label>
+    <input type="text" name="input-year" id="input-year">
+
+    <label for="input-city">City: </label>
+    <input type="text" name="input-city" id="input-city" required>
+
+    <label for="input-country">Country: </label>
+    <input type="email" name="input-country" id="input-country">
+
+    <label for="input-website">Website URL: </label>
+    <input type="url" name="input-website" id="input-website">
+
+    <label for="input-isOnline">Is this conference online: </label>
+    <select name="input-isOnline" id="input-isOnline">
+        <option value=""></option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_orginizations.js"></script>

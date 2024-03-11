@@ -1,0 +1,71 @@
+<!--
+// Citation:
+// Date: 3/6/24
+// Based on nodejs-starter-app
+// This code's logic and structure is unoriginal. It has been adapted to work 
+// for our group's schema. 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- organizations.hbs -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- Create a table --}}
+<table id="organizations-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.organizationID}}</td>
+            <td>{{this.organizationName}}</td>
+            <td>{{this.organizationCountry}}</td>
+            <td>{{this.isUniversity}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<!-- /views/authorOrganizations.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add New Organizations</h2>
+<p>To add a new organization, please enter their information below and click 'Submit'!</p>
+<form id="add-organizations-form-ajax">
+    <legend>Add Organization</legend>
+
+    <label for="input-orgName">Organization Name: </label>
+    <input type="text" name="input-orgName" id="input-orgName">
+
+    <label for="input-country">Country: </label>
+    <input type="text" name="input-country" id="input-country">
+
+    <label for="input-isUniversity">Is this a university: </label>
+    <select name="input-isUniversity" id="input-isUniversity">
+        <option value=""></option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_organizations.js"></script>
