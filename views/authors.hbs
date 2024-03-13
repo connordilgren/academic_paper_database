@@ -36,7 +36,7 @@
 
         {{!-- For each row, print the attributes, in order --}}
         {{#each data}}
-        <tr>
+        <tr data-value={{this.authorID}}>
             <td>{{this.authorID}}</td>
             <td>{{this.firstName}}</td>
             <td>{{this.middleName}}</td>
