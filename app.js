@@ -37,21 +37,19 @@ app.get('/', function(req, res)
 // authors
 
 app.get('/authors', function(req, res)
-    {  
-        let query1 = "SELECT * FROM Authors;";                  // Define our query
+{  
+    let query1 = "SELECT * FROM Authors;";                  // Define our query
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            res.render('authors', {data: rows});                // Render the authors.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
-    });                                                         // received back from the query
+        res.render('authors', {data: rows});                // Render the authors.hbs file, and also send the renderer
+    })                                                      // an object where 'data' is equal to the 'rows' we
+});                                                         // received back from the query
 
 app.post('/add-author-ajax', function(req, res) 
 {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-
-    console.log(data)
 
     // Capture NULL values
     let firstName = data.firstName;
@@ -81,7 +79,7 @@ app.post('/add-author-ajax', function(req, res)
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES (?, ?, ?, ?, ?, ?, ?)`
+    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
     db.pool.query(query1, [firstName, middleName, data.lastName, email, website, isRetired, hIndex], function(error, rows, fields){
 
@@ -234,25 +232,17 @@ app.post('/add-paper-ajax', function(req, res)
     let numCitations = data.numCitations;
     let conference = data.conference;
 
-    if (numCitations.length === 0 && conference.length === 0)
-    {
-        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', NULL, NULL)`;
+    if (numCitations.length === 0) {
+        numCitations = null;
     }
-    else if (numCitations.length !== 0 && conference.length === 0)
-    {
-        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', NULL)`;
-    }
-    else if (numCitations.length === 0 && conference.length !== 0)
-    {
-        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', NULL, '${conference}')`;
-    }
-    else
-    {
-        query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES ('${data.title}', '${data.yearPublished}', '${data.numCitations}', '${conference}')`;
+    if (conference.length === 0) {
+        conference = null
     }
 
+    query1 = `INSERT INTO Papers (title, yearPublished, numCitations, conferenceID) VALUES (?, ?, ?, ?)`;
+
     // Create the query and run it on the database
-    db.pool.query(query1, function(error, rows, fields){
+    db.pool.query(query1, [data.title, data.yearPublished, numCitations, conference], function(error, rows, fields){
 
         // Check to see if there was an error
         if (error) {

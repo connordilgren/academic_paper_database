@@ -99,7 +99,7 @@ VALUES
 CREATE OR REPLACE TABLE Papers (
   paperID int AUTO_INCREMENT,
   title varchar(255) NOT NULL,
-  yearPublished year NOT NULL,
+  yearPublished varchar(4) NOT NULL,
   numCitations int,
   conferenceID int,
   PRIMARY KEY (paperID),
