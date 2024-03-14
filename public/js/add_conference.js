@@ -15,16 +15,16 @@ addConferencesForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Get form fields we need to get data from
-    let inputConferenceName = document.getElementById("input-conName");
+    let inputConferenceName = document.getElementById("input-cname");
     let inputYear = document.getElementById("input-year");
-    let inputcity = document.getElementById("input-city");
+    let inputCity = document.getElementById("input-city");
     let inputCountry = document.getElementById("input-country");
     let inputIsOnline = document.getElementById("input-isOnline");
 
     // Get the values from the form fields
     let conferenceNameValue = inputConferenceName.value;
     let yearValue = inputYear.value;
-    let cityValue = inputcity.value;
+    let cityValue = inputCity.value;
     let countryValue = inputCountry.value;
     let isOnlineValue = inputIsOnline.value;
 
@@ -39,7 +39,7 @@ addConferencesForm.addEventListener("submit", function (e) {
     
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-conferences-ajax", true);
+    xhttp.open("POST", "/add-conference-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -52,7 +52,7 @@ addConferencesForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputConferenceName.value = '';
             inputYear.value = '';
-            inputcity.value = '';
+            inputCity.value = '';
             inputCountry.value = '';
             inputIsOnline.value = '';
         }
@@ -100,12 +100,6 @@ addRowToTable = (data) => {
     countryCell.innerText = newRow.country;
     isOnlineCell.innerText = newRow.isOnline;
 
-    deleteCell = document.createElement("button");
-    deleteCell.innerHTML = "Delete";
-    deleteCell.onclick = function(){
-        deleteConference(newRow.conferenceID);
-    };
-
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(conferenceNameCell);
@@ -113,10 +107,6 @@ addRowToTable = (data) => {
     row.appendChild(cityCell);
     row.appendChild(countryCell);
     row.appendChild(isOnlineCell);
-    row.appendChild(deleteCell);
-
-    // Add a row attribute so the deleteRow function can find a newly added row
-    row.setAttribute('data-value', newRow.conferenceID);
     
     // Add the row to the table
     currentTable.appendChild(row);

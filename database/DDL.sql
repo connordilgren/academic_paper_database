@@ -32,7 +32,7 @@ VALUES
 CREATE OR REPLACE TABLE Conferences (
   conferenceID int AUTO_INCREMENT,
   name varchar(255) NOT NULL,
-  year year NOT NULL,
+  year varchar(4) NOT NULL,
   city varchar(255),
   country varchar(255),
   isOnline tinyint(1),

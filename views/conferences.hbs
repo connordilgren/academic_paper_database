@@ -11,6 +11,8 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<h2>Conferences Table</h2>
+
 {{!-- Create a table --}}
 <table id="Conferences-table">
 
@@ -48,25 +50,20 @@
 <!-- /views/conferences.hbs -->
 
 {{!-- Form to add a record to the table  --}}
-<h2>Add New Conferences</h2>
-<p>To add a new conferences, please enter their information below and click 'Submit'!</p>
 <form id="add-conferences-form-ajax">
-    <legend>Add Conferences</legend>
+    <legend>Add Conference</legend>
 
     <label for="input-cname">Conference Name: </label>
-    <input type="text" name="input-cname" id="input-cname">
+    <input type="text" name="input-cname" id="input-cname" required>
 
     <label for="input-year">Year: </label>
-    <input type="text" name="input-year" id="input-year">
+    <input type="number" name="input-year" id="input-year" required>
 
     <label for="input-city">City: </label>
-    <input type="text" name="input-city" id="input-city" required>
+    <input type="text" name="input-city" id="input-city">
 
     <label for="input-country">Country: </label>
-    <input type="email" name="input-country" id="input-country">
-
-    <label for="input-website">Website URL: </label>
-    <input type="url" name="input-website" id="input-website">
+    <input type="text" name="input-country" id="input-country">
 
     <label for="input-isOnline">Is this conference online: </label>
     <select name="input-isOnline" id="input-isOnline">
@@ -79,4 +76,4 @@
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_orginizations.js"></script>
+<script src="./js/add_conference.js"></script>

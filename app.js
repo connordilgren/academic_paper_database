@@ -38,11 +38,11 @@ app.get('/', function(req, res)
 
 app.get('/authors', function(req, res)
     {  
-        let query1 = "SELECT * FROM Authors;";               // Define our query
+        let query1 = "SELECT * FROM Authors;";                  // Define our query
 
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            res.render('authors', {data: rows});                  // Render the authors.hbs file, and also send the renderer
+            res.render('authors', {data: rows});                // Render the authors.hbs file, and also send the renderer
         })                                                      // an object where 'data' is equal to the 'rows' we
     });                                                         // received back from the query
 
@@ -291,6 +291,81 @@ app.delete('/delete-paper-ajax/', function(req,res,next){
                 res.sendStatus(204);
             }
   })});
+
+
+// conferences
+
+app.get('/conferences', function(req, res)
+    {  
+        let query1 = "SELECT * FROM Conferences;";
+
+        db.pool.query(query1, function(error, rows, fields){
+
+            res.render('conferences', {data: rows});
+        })
+    });
+
+app.post('/add-conference-ajax', function(req, res) 
+{
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    console.log(data)
+
+    // Capture NULL values for city, country, and isOnline
+    let city = data.city;
+    let country = data.country;
+    let isOnline = data.isOnline;
+
+    if (city.length === 0) {
+        city = null;
+    }
+    if (country.length === 0) {
+        country = null;
+    }
+    if (isOnline.length === 0) {
+        isOnline = null;
+    }
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Conferences (name, year, city, country, isOnline) VALUES (?, ?, ?, ?, ?)`;
+
+    console.log(query1)
+
+    db.pool.query(query1, [data.conName, data.year, city, country, isOnline], function (error, rows, fields) {
+    // db.pool.query(query1, function(error, rows, fields){
+
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT
+            query2 = "SELECT * FROM Conferences;";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+
 
 /*
     LISTENER
