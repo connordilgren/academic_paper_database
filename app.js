@@ -54,25 +54,36 @@ app.post('/add-author-ajax', function(req, res)
     console.log(data)
 
     // Capture NULL values
+    let firstName = data.firstName;
+    let middleName = data.middleName;
+    let email = data.email;
+    let website = data.website;
     let isRetired = data.isRetired;
     let hIndex = data.hIndex;
 
-    if (isRetired.length === 0 && hIndex === 0) {
-        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', NULL, NULL)`;
+    if (firstName.length === 0) {
+        firstName = null;
     }
-    else if (isRetired.length !== 0 && hIndex === 0) {
-        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', NULL)`;
+    if (middleName.length === 0) {
+        middleName = null;
     }
-    else if (isRetired.length === 0 && hIndex !== 0) {
-        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', NULL, '${hIndex}')`;
+    if (email.length === 0) {
+        email = null;
     }
-    else {
-        query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES ('${data.firstName}', '${data.middleName}', '${data.lastName}', '${data.email}', '${data.website}', '${data.isRetired}', '${hIndex}')`;
+    if (website.length === 0) {
+        website = null;
+    }
+    if (isRetired.length === 0) {
+        isRetired = null;
+    }
+    if (hIndex.length === 0) {
+        hIndex = null;
     }
 
     // Create the query and run it on the database
-    
-    db.pool.query(query1, function(error, rows, fields){
+    query1 = `INSERT INTO Authors (firstName, middleName, lastName, email, websiteURL, isRetired, hIndex) VALUES (?, ?, ?, ?, ?, ?, ?)`
+
+    db.pool.query(query1, [firstName, middleName, data.lastName, email, website, isRetired, hIndex], function(error, rows, fields){
 
         // Check to see if there was an error
         if (error) {
@@ -310,8 +321,6 @@ app.post('/add-conference-ajax', function(req, res)
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    console.log(data)
-
     // Capture NULL values for city, country, and isOnline
     let city = data.city;
     let country = data.country;
@@ -330,11 +339,7 @@ app.post('/add-conference-ajax', function(req, res)
     // Create the query and run it on the database
     query1 = `INSERT INTO Conferences (name, year, city, country, isOnline) VALUES (?, ?, ?, ?, ?)`;
 
-    console.log(query1)
-
     db.pool.query(query1, [data.conName, data.year, city, country, isOnline], function (error, rows, fields) {
-    // db.pool.query(query1, function(error, rows, fields){
-
 
         // Check to see if there was an error
         if (error) {
