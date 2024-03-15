@@ -52,9 +52,9 @@ SELECT authorOrganizationID,
        authorstartDate, 
        authorEndDate
    FROM AuthorOrganizations
-      INNER JOIN Organizations
+      LEFT JOIN Organizations
       ON AuthorOrganizations.organizationID = Organizations.organizationID
-      INNER JOIN Authors
+      LEFT JOIN Authors
       ON AuthorOrganizations.authorID = Authors.authorID
    ORDER BY authorOrganizationID ASC;
 

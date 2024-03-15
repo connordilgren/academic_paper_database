@@ -138,7 +138,7 @@ app.delete('/delete-author-ajax/', function(req,res,next){
 
 app.get('/authorOrganizations', function(req, res)
 {  
-    let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";               // Define our query
+    let query1 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations LEFT JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID LEFT JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";               // Define our query
     let query2 = "SELECT organizationID, name FROM Organizations";
     let query3 = "SELECT authorID, lastName FROM Authors";
     
@@ -166,10 +166,20 @@ app.post('/add-authorOrganization-ajax', function(req, res)
     let data = req.body;
 
     // Capture NULL values
+    let orgName = data.orgName;
+    let lastName = data.lastName;
+
+    if (orgName.length === 0) {
+        orgName = null;
+    }
+    if (lastName.length === 0) {
+        lastName = null;
+    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO AuthorOrganizations (organizationID, authorID, authorstartDate, authorEndDate) VALUES ('${data.orgName}', '${data.lastName}', '${data.startDate}', '${data.endDate}')`;
-    db.pool.query(query1, function(error, rows, fields){
+    query1 = `INSERT INTO AuthorOrganizations (organizationID, authorID, authorstartDate, authorEndDate) VALUES (?, ?, ?, ?)`;
+
+    db.pool.query(query1, [orgName, lastName, data.startDate, data.endDate], function(error, rows, fields){
 
         // Check to see if there was an error
         if (error) {
@@ -181,7 +191,7 @@ app.post('/add-authorOrganization-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT
-            query2 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations INNER JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID INNER JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";
+            query2 = "SELECT authorOrganizationID, Organizations.name AS organizationName, Authors.lastName AS authorLastName, authorstartDate, authorEndDate FROM AuthorOrganizations LEFT JOIN Organizations ON AuthorOrganizations.organizationID = Organizations.organizationID LEFT JOIN Authors ON AuthorOrganizations.authorID = Authors.authorID ORDER BY authorOrganizationID ASC;";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
