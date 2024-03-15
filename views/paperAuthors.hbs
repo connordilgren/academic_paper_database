@@ -1,0 +1,75 @@
+<!--
+// Citation:
+// Date: 3/1/24
+// Based on nodejs-starter-app
+// This code's logic and structure is unoriginal. It has been adapted to work 
+// for our group's schema. 
+// Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- authors.hbs -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h2>Paper Authors Table</h2>
+
+{{!-- Create a table --}}
+<table id="PaperAuthors-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the attributes, in order --}}
+        {{#each data}}
+        <tr data-value={{this.authorID}}>
+            <td>{{this.paperTitle}}</td>
+            <td>{{this.authorLastName}}</td>
+            <td><button onclick="deleteAuthor({{this.paperID}}, {{this.authorID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{!-- <script src="./js/delete_paperAuthor.js"></script> --}}
+
+<!-- /views/index.hbs -->
+
+{{!-- Form to add a record to the table  --}}
+<form id="add-paperAuthor-form-ajax">
+    <legend>Add Author</legend>
+
+    <label for="input-pname">Paper Name: </label>
+    <select name="input-pname" id="input-pname">
+        <option value="">Select a Paper</option>
+        {{#each papers}}
+            <option value="{{this.paperID}}">{{this.title}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-aname">Author Last Name: </label>
+    <select name="input-aname" id="input-aname">
+        <option value="">Select an Author Last Name</option>
+        {{#each authors}}
+            <option value="{{this.authorID}}">{{this.lastName}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+{{!-- <script src="./js/add_paperAuthor.js"></script> --}}

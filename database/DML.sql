@@ -106,9 +106,9 @@ UPDATE Papers
 SELECT Papers.title AS paperTitle, 
        Authors.lastName AS authorLastName
    FROM PaperAuthors
-      INNER JOIN Papers
+      LEFT JOIN Papers
       ON PaperAuthors.paperID = Papers.paperID
-      INNER JOIN Authors
+      LEFT JOIN Authors
       ON PaperAuthors.authorID = Authors.authorID;
 
 # Insert

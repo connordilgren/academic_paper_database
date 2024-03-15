@@ -373,6 +373,7 @@ app.post('/add-conference-ajax', function(req, res)
 
 
 // organizations
+
 app.get('/organizations', function(req, res)
     {  
         let query1 = "SELECT * FROM Organizations;";
@@ -422,6 +423,33 @@ app.post('/add-organization-ajax', function(req, res)
             }
         })
     });
+
+
+// paperAuthors
+
+app.get('/paperAuthors', function(req, res)
+{  
+    let query1 = "SELECT Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID;";               // Define our query
+    let query2 = "SELECT paperID, title FROM Papers;";
+    let query3 = "SELECT authorID, lastName FROM Authors;";
+
+    db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+        let paperAuthors = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+
+            let papers = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+
+                let authors = rows;
+
+                res.render('paperAuthors', {data: paperAuthors, papers: papers, authors: authors});
+            })
+        })
+    })
+});
 
 /*
     LISTENER
