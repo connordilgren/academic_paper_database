@@ -11,8 +11,10 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<h2>Organizations Table</h2>
+
 {{!-- Create a table --}}
-<table id="organizations-table">
+<table id="Organizations-table">
 
     {{!-- Header section --}}
     <thead>
@@ -35,30 +37,26 @@
         {{#each data}}
         <tr>
             <td>{{this.organizationID}}</td>
-            <td>{{this.organizationName}}</td>
-            <td>{{this.organizationCountry}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.country}}</td>
             <td>{{this.isUniversity}}</td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
-<!-- /views/authorOrganizations.hbs -->
-
 {{!-- Form to add a record to the table  --}}
-<h2>Add New Organizations</h2>
-<p>To add a new organization, please enter their information below and click 'Submit'!</p>
-<form id="add-organizations-form-ajax">
+<form id="add-organization-form-ajax">
     <legend>Add Organization</legend>
 
     <label for="input-orgName">Organization Name: </label>
-    <input type="text" name="input-orgName" id="input-orgName">
+    <input type="text" name="input-orgName" id="input-orgName" required>
 
     <label for="input-country">Country: </label>
-    <input type="text" name="input-country" id="input-country">
+    <input type="text" name="input-country" id="input-country" required>
 
     <label for="input-isUniversity">Is this a university: </label>
-    <select name="input-isUniversity" id="input-isUniversity">
+    <select name="input-isUniversity" id="input-isUniversity" required>
         <option value=""></option>
         <option value="1">Yes</option>
         <option value="0">No</option>
@@ -68,4 +66,4 @@
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_organizations.js"></script>
+<script src="./js/add_organization.js"></script>
