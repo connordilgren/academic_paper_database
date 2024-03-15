@@ -429,7 +429,7 @@ app.post('/add-organization-ajax', function(req, res)
 
 app.get('/paperAuthors', function(req, res)
 {  
-    let query1 = "SELECT Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID;";               // Define our query
+    let query1 = "SELECT paperAuthorID, Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID;";               // Define our query
     let query2 = "SELECT paperID, title FROM Papers;";
     let query3 = "SELECT authorID, lastName FROM Authors;";
 
@@ -482,7 +482,7 @@ app.post('/add-paperAuthor-ajax', function(req, res)
         else
         {
             // If there was no error, perform a SELECT
-            query2 = "SELECT Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID;";
+            query2 = "SELECT paperAuthorID, Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID;";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -501,6 +501,28 @@ app.post('/add-paperAuthor-ajax', function(req, res)
         }
     })
 });
+
+app.delete('/delete-paperAuthor-ajax/', function(req,res,next){
+    let data = req.body;
+
+    // handle null values
+    let paperAuthorID = parseInt(data.paperAuthorID);
+
+    query1 = `DELETE FROM PaperAuthors WHERE paperAuthorID = ?;`;
+
+    // Run the 1st query
+    db.pool.query(query1, [paperAuthorID], function(error, rows, fields){
+    if (error) {
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+    }
+    else
+    {
+        res.sendStatus(204);
+    }
+
+  })});
 
 /*
     LISTENER

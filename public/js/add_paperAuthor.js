@@ -43,6 +43,8 @@ addPaperAuthorForm.addEventListener("submit", function (e) {
             // Clear the input fields for another transaction
             inputPaperID.value = '';
             inputAuthorID.value = '';
+
+            location.reload();
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -69,18 +71,29 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row and cells
     let row = document.createElement("TR");
     let paperNameCell = document.createElement("TD");
     let authorNameCell = document.createElement("TD");
+
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     paperNameCell.innerText = newRow.paperTitle;
     authorNameCell.innerText = newRow.authorLastName;
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deletePaper(newRow.paperID, newRow.authorID);
+    };
+
     // Add the cells to the row 
     row.appendChild(paperNameCell);
     row.appendChild(authorNameCell);
+
+    // Add a row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.paperAuthorID);
     
     // Add the row to the table
     currentTable.appendChild(row);

@@ -36,15 +36,16 @@
 
         {{!-- For each row, print the attributes, in order --}}
         {{#each data}}
-        <tr data-value={{this.authorID}}>
+        <tr data-value={{this.paperAuthorID}}>
+            <td>{{this.paperAuthorID}}</td>
             <td>{{this.paperTitle}}</td>
             <td>{{this.authorLastName}}</td>
-            <td><button onclick="deleteAuthor({{this.paperID}}, {{this.authorID}})">Delete</button></td>
+            <td><button onclick="deletePaperAuthor({{this.paperAuthorID}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-{{!-- <script src="./js/delete_paperAuthor.js"></script> --}}
+<script src="./js/delete_paperAuthor.js"></script>
 
 <!-- /views/index.hbs -->
 
