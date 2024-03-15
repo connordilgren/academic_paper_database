@@ -63,6 +63,9 @@ addAuthorForm.addEventListener("submit", function (e) {
             inputWebsite.value = '';
             inputIsRetired.value = '';
             inputHIndex.value = '';
+            
+            location.reload();
+            
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -97,7 +100,7 @@ addRowToTable = (data) => {
     let emailCell = document.createElement("TD");
     let websiteCell = document.createElement("TD");
     let isRetiredCell = document.createElement("TD");
-    let hIndexCell = document.createElementNS("TD");
+    let hIndexCell = document.createElement("TD");
 
     let deleteCell = document.createElement("TD");
 
