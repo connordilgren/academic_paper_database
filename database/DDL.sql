@@ -122,8 +122,10 @@ VALUES
 -- Create PaperAuthors Table
 --
 CREATE OR REPLACE TABLE PaperAuthors (
+  paperAuthorID int AUTO_INCREMENT,
   paperID int,
   authorID int,
+  PRIMARY KEY(paperAuthorID), 
   FOREIGN KEY(paperID) REFERENCES Papers(paperID) ON DELETE CASCADE,
   FOREIGN KEY(authorID) REFERENCES Authors(authorID) ON DELETE SET NULL
 );
@@ -132,7 +134,7 @@ CREATE OR REPLACE TABLE PaperAuthors (
 -- Insert sample data into PaperAuthors
 --
 INSERT INTO PaperAuthors
-/* (paperID, authorID) */
+(paperID, authorID)
 VALUES
 (1, 2),
 (4, 2),

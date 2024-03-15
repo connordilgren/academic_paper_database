@@ -103,13 +103,15 @@ UPDATE Papers
 
 # PaperAuthors Table ----------------------------------------------------------
 # Read
-SELECT Papers.title AS paperTitle, 
+SELECT paperAuthorID, 
+       Papers.title AS paperTitle, 
        Authors.lastName AS authorLastName
    FROM PaperAuthors
       LEFT JOIN Papers
       ON PaperAuthors.paperID = Papers.paperID
       LEFT JOIN Authors
-      ON PaperAuthors.authorID = Authors.authorID;
+      ON PaperAuthors.authorID = Authors.authorID
+   ORDER BY paperAuthorID ASC;
 
 # Insert
 # drop down 1: get paper ids, titles
