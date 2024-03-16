@@ -27,6 +27,7 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>edit</th>
             <th>delete</th>
         </tr>
     </thead>
@@ -40,6 +41,7 @@
             <td>{{this.paperAuthorID}}</td>
             <td>{{this.paperTitle}}</td>
             <td>{{this.authorLastName}}</td>
+            <td><button onclick="editPaperAuthor({{this.paperAuthorID}})">Edit</button></td>
             <td><button onclick="deletePaperAuthor({{this.paperAuthorID}})">Delete</button></td>
         </tr>
         {{/each}}
@@ -47,11 +49,9 @@
 </table>
 <script src="./js/delete_paperAuthor.js"></script>
 
-<!-- /views/index.hbs -->
-
 {{!-- Form to add a record to the table  --}}
 <form id="add-paperAuthor-form-ajax">
-    <legend>Add Author</legend>
+    <legend>Add Paper Author</legend>
 
     <label for="input-pname">Paper Name: </label>
     <select name="input-pname" id="input-pname">
@@ -74,3 +74,32 @@
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./js/add_paperAuthor.js"></script>
+
+
+<form id="update-paperAuthor-form-ajax">
+    <legend>Update Paper Author</legend>
+
+    <label for="paper-author-id-update">Paper Author ID</label>
+    <input type="text" id="paper-author-id-update" disabled />
+
+    <label for="input-pname-update">Paper Name: </label>
+    <select name="input-pname-update" id="input-pname-update">
+        <option>Select a Paper</option>
+        {{#each papers}}
+            <option value="{{this.paperID}}">{{this.title}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-aname-update">Author Last Name: </label>
+    <select name="input-aname-update" id="input-aname-update">
+        <option>Select an Author Last Name</option>
+        {{#each authors}}
+            <option value="{{this.authorID}}">{{this.lastName}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_paperAuthor.js"></script>
