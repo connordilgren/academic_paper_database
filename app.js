@@ -15,7 +15,7 @@ var app     = express();            // We need to instantiate an express object 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT        = 52739;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 52742;                 // Set a port number at the top so it's easy to change in the future
 
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
@@ -424,43 +424,7 @@ app.post('/add-organization-ajax', function(req, res)
         })
     });
 
-
 // paperAuthors
-app.put('/put-paperAuthor-ajax', function(req,res,next){
-    let data = req.body;
-  
-    let homeworld = parseInt(data.homeworld);
-    let person = parseInt(data.fullname);
-  
-    let query1 = `UPDATE PaperAuthors SET authorID= ? WHERE paperAuthorID = ?;`;
-
-    let selectPaper = `SELECT * FROM bsg_planets WHERE id = ?`
-  
-          // Run the 1st query
-          db.pool.query(query1, [homeworld, person], function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(selectWorld, [homeworld], function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
-  })});
 
 app.get('/paperAuthors', function(req, res)
 {  
@@ -559,7 +523,40 @@ app.delete('/delete-paperAuthor-ajax/', function(req,res,next){
 
   })});
 
+app.put('/put-paperAuthor-ajax', function(req,res,next){
+    let data = req.body;
+    console.log(data)
+    // handle null value
+    let authorID = data.authorID;
+    if (data.authorID === "null") {
+        authorID = null;
+    }
+    console.log(authorID)
+    let query1 = `UPDATE PaperAuthors SET paperID = ?, authorID = ? WHERE paperAuthorID = ?;`;
+
+    let query2 = `SELECT paperAuthorID, Papers.title AS paperTitle, Authors.lastName AS authorLastName FROM PaperAuthors LEFT JOIN Papers ON PaperAuthors.paperID = Papers.paperID LEFT JOIN Authors ON PaperAuthors.authorID = Authors.authorID WHERE paperAuthorID = ?;`;
   
+    db.pool.query(query1, [data.paperID, authorID, data.paperAuthorID], function(error, rows, fields){
+        if (error) {
+  
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            // If there was no error, we run our second query and return that data so we can use it to update the table on the front-end
+            else
+            {
+                db.pool.query(query2, [data.paperAuthorID], function(error, rows, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    } else {
+                        res.send(rows);
+                    }
+                })
+            }
+  })});
 
 /*
     LISTENER

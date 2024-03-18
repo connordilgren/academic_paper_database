@@ -78,13 +78,14 @@
 
 <form id="update-paperAuthor-form-ajax">
     <legend>Update Paper Author</legend>
+    <p>To update a Paper Author record, select the "Edit" button in the above table in the row that you'd like to update. Then, use the drop-downs in this form to set the desired paper title and author last name. Hit the submit button to submit your changes.
+    </p>
 
     <label for="paper-author-id-update">Paper Author ID</label>
-    <input type="text" id="paper-author-id-update" disabled />
+    <input type="text" id="paper-author-id-update" disabled required/>
 
     <label for="input-pname-update">Paper Name: </label>
     <select name="input-pname-update" id="input-pname-update">
-        <option>Select a Paper</option>
         {{#each papers}}
             <option value="{{this.paperID}}">{{this.title}}</option>
         {{/each}}
@@ -92,7 +93,7 @@
 
     <label for="input-aname-update">Author Last Name: </label>
     <select name="input-aname-update" id="input-aname-update">
-        <option>Select an Author Last Name</option>
+        <option value="null">null</option>
         {{#each authors}}
             <option value="{{this.authorID}}">{{this.lastName}}</option>
         {{/each}}

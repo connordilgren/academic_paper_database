@@ -28,7 +28,7 @@ updatePaperAuthorForm.addEventListener("submit", function (e) {
 
     // Put our data we want to send in a javascript object
     let data = {
-        paperAuthor: paperAuthorIDValue,
+        paperAuthorID: paperAuthorIDValue,
         paperID: paperIDValue,
         authorID: authorIDValue
     }
@@ -43,7 +43,7 @@ updatePaperAuthorForm.addEventListener("submit", function (e) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updatePaperAuthor(xhttp.response, paperAuthorID);
+            updatePaperAuthor(xhttp.response);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -58,18 +58,19 @@ updatePaperAuthorForm.addEventListener("submit", function (e) {
 
 function editPaperAuthor(paperAuthorID) {
     let paperAuthorIDField = document.getElementById("paper-author-id-update");
-    paperAuthorIDField.innerText = paperAuthorID;
+    paperAuthorIDField.value = paperAuthorID;
 }
 
-function updatePaperAuthor(data, paperAuthorID){
+function updatePaperAuthor(data){
     let parsedData = JSON.parse(data);
+    console.log(parsedData[0]);
     
     let table = document.getElementById("PaperAuthors-table");
 
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data-value") == paperAuthorID) {
+       if (table.rows[i].getAttribute("data-value") == parsedData[0].paperAuthorID) {
 
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
@@ -83,4 +84,12 @@ function updatePaperAuthor(data, paperAuthorID){
             td_authorLastName.innerHTML = parsedData[0].authorLastName;
        }
     }
+
+    // clear the Paper Author ID field
+    let paperAuthorIDField = document.getElementById("paper-author-id-update");
+    paperAuthorIDField.value = null;
+    let paperIDField = document.getElementById("input-pname-update");
+    paperIDField.value = "Select a Paper";
+    let authorIDField = document.getElementById("input-aname-update");
+    authorIDField.value = "Select an Author Last Name";
 }
