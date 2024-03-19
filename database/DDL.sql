@@ -23,8 +23,7 @@ VALUES
 (2,'Aaron', NULL,'Defazio', 'aaron.defazio@gmail.com','https://www.aarondefazio.com/',0,17),
 (3,'Konstantin','Casadeen','Mishchenko','konsta.mish@gmail.com','https://www.konstmish.com/',0,20),
 (4,'Joar', NULL, 'Skalse', 'joar.skalse@cs.ox.ac.uk','https://www.fhi.ox.ac.uk/team/joar-skalse/',0,8),
-(5,'John', NULL, 'Kirchenbauer', NULL, NULL, 0, NULL),
-(6,'Rylan', NULL,'Schaeffer', NULL, NULL, 0, NULL);
+(5,'John', NULL, 'Kirchenbauer', NULL, NULL, 0, NULL);
 
 --
 -- Create Conferences Table
