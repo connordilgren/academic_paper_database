@@ -5,7 +5,7 @@ CREATE OR REPLACE TABLE Authors (
   authorID int AUTO_INCREMENT,
   firstName varchar(255),
   middleName varchar(255),
-  lastName varchar(255) NOT NULL DEFAULT 'anonymous',
+  lastName varchar(255) NOT NULL,
   email varchar(320),
   websiteURL varchar(2048),
   isRetired tinyint(1),
