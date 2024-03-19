@@ -2,38 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 /*   ----- Variables  -----  */
-/* :root {
-  }
-   */
   /*  ----- Viewport ----- elements inherited by all remaining elements ----- */
   body {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
   }
-
-  /*  ----- Page layout blocks -----  */
-  /* header {
-  } 
-  header img {
-} 
-  main {
-  } */
-  /* section {}
-  article {}
-    #topic1 {}
-    #topic2 {}
-  div {}
-  aside {} */
-  /* footer {
-  } */
-  
-  /* ----- Anchors ----- Text links */
-  /* a {}
-  a:link {}
-  a:hover {}
-  a:active {}
-  a:visited {} */
   
    /* ----- Navigation ----- Override text links for navigation only.  */
   nav {
@@ -47,58 +21,12 @@
   nav a:hover {
       color: red;
   }
-  /*
-  .local {
-  }
-  .local a {
-  }
-  .local a:hover {
-  } */
-
-  /*  -----  Typography  ----- */
-  /* p {}
-  br {}
-  ol, ul, dl {}
-  li {}
-  dt {}
-  dd {} */
   
   h1, h2, h3, h4, h5, h6 {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
     font-style: normal;
   } 
-  /* h1 {}
-  h2 {}
-  h3 {}
-  h4 {}
-  h5 {}
-  h6 {}
-  
-  abbr {}
-  acronym {}
-  address {}
-  blockquote {}
-    q {}
-    cite {}
-  em {}
-  hr {}
-  mark {}
-  s {}
-  span {}
-  strong {}
-  sub {}
-  sup {}
-  time {} */
-  
-  /*  ----- Coding or instructional typography ----- */
-  /* pre {}
-  code {}
-  kbd {}
-  samp {}
-  var {}
-  del {} 
-  ins {} */
   
   /*  ----- Table ----- */
   table {
@@ -106,11 +34,6 @@
     border-collapse: collapse;
     margin-top: 15px;
   }
-  /* caption {}
-  thead {}
-  tbody {}
-  tfoot {}
-  tr {} */
   th {
     border: 1px solid;
     padding: 10px;
@@ -121,14 +44,6 @@
     text-align: center; 
     margin: auto;
   }
-  /* tr:nth-child(even) {
-    background-color: lightgrey;
-  } */
-  
-    /* td:nth-child(1) {}
-  colgroup {}
-  data {}
-  datalist {} */
   
   /*  ----- Form ----- */
   form {
@@ -166,65 +81,3 @@
   select {
     max-width: 500px;
   }
-    /* optgroup {}
-    option {}
-  textarea {
-  }
-  output {}
-  meter {}
-  progress {}   */
-  
-  /* ----- Media ----- */
-  /* figure {}
-    figcaption {}
-    figure img {}
-  svg {}
-  picture {}
-    source {}
-  iframe {}
-  video {}
-  audio {}
-  embed {}
-  object {} */
-  
-  /*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
-  /* .gallery { 
-  }
-  .gallery figure {
-  }
-  .gallery img {
-  }
-  .gallery figcaption {
-  } */
-  
-  /* .floatright {}
-  .floatleft {}
-  .center-middle {}
-  
-  .ten {}
-  .twenty {}
-  .thirty {}
-  .forty {}
-  .fifty {}
-  .sixty {}
-  .seventy {}
-  .eighty {}
-  
-  .radius {}
-  .circle {}
-  .boxshadow {}
-  .tshadow {} 
-  .gradient {}
-  .shape {} */
-  
-  /* @keyframes App-logo {} */
-  
-  /*   ===== TABLET  media query overrides mobile styles ===== */
-  /* @media all and (min-width: 600px) {} */
-  
-  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-  /* @media all and (min-width: 1080px) {} */
-  
-  /*   ===== PRINT  media query overrides previous styles =====  */
-  /* @media print {} */
-  

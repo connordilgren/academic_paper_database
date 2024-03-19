@@ -67,8 +67,7 @@ addConferencesForm.addEventListener("submit", function (e) {
 })
 
 
-// Creates a single row from an Object representing a single record from 
-// bsg_people
+// Creates a single row from an Object representing a single record
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -89,8 +88,6 @@ addRowToTable = (data) => {
     let cityCell = document.createElement("TD");
     let countryCell = document.createElement("TD");
     let isOnlineCell = document.createElement("TD");
-
-    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.conferenceID;

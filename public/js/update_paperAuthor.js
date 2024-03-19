@@ -56,6 +56,7 @@ updatePaperAuthorForm.addEventListener("submit", function (e) {
 
 })
 
+// original function, edits field in form
 function editPaperAuthor(paperAuthorID) {
     let paperAuthorIDField = document.getElementById("paper-author-id-update");
     paperAuthorIDField.value = paperAuthorID;
@@ -72,20 +73,20 @@ function updatePaperAuthor(data){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == parsedData[0].paperAuthorID) {
 
-            // Get the location of the row where we found the matching person ID
+            // Get the location of the row where we found the matching paperAuthorID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            // Get td of updated fields
             let td_paperTitle = updateRowIndex.getElementsByTagName("td")[1];
             let td_authorLastName = updateRowIndex.getElementsByTagName("td")[2];
 
-            // Reassign homeworld to our value we updated to
+            // Reassign fields to updated values
             td_paperTitle.innerHTML = parsedData[0].paperTitle; 
             td_authorLastName.innerHTML = parsedData[0].authorLastName;
        }
     }
 
-    // clear the Paper Author ID field
+    // original block, clears the Paper Author ID field
     let paperAuthorIDField = document.getElementById("paper-author-id-update");
     paperAuthorIDField.value = null;
     let paperIDField = document.getElementById("input-pname-update");
